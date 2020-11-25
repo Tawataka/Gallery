@@ -22,13 +22,27 @@
     color: white;
     margin-bottom: 15px;
 }
-
+.shop-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.shop-item {
+    margin: 30px;
+    
+}
+.tile-merch {
+    width: 700px;
+    padding: 30px;  
+    margin: 0 auto;
+}
 .btn-primary {
     color: white;
     background-color: #56CCF2;
     border: none;
     border-radius: .3em;
     font-weight: bold;
+    font-size: 20px;
 }
 .btn-primary:hover {
     background-color: #2D9CDB;

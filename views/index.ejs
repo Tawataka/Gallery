@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css"/>
+		<link rel="stylesheet" href="/store.css" />
+		<script src="https://checkout.stripe.com/checkout.js" defer></script>
+		<script>
+			var stripePublicKey = "<%= stripePublicKey %>"
+		</script>
+		<script src="store.js" defer></script>
+	</head>
+	<body>
+	    <section class="section">
+	    	<div class="container is-fluid">
+	            <div class="hero is-parent is-info is-warning">
+	                <div class="hero-body is-child">
+		                <h1 class="title">Art Gallery</h1>
+		                <h1 class="subtitle">By Tawa Reyna</h1> 
+	                </div>
+	            </div>
+       		</div>
+	    </section>
+
+	    <section class="section">
+	        <div class="container is-fluid">
+	        	<p class="title">Inventory</p>	
+				<% items.merch.forEach(function(item){ %>
+					<div class="tile-merch is-parent is-vertical">
+						<article class="tile is-child notification is-black">
+								<div class="shop-item" data-item-id="<%= item.id %>">
+									<figure class="image">
+										<a href = "/images/<%= item.image %>">
+											<img class="shop-item-image" src="/images/<%= item.image %>">
+										</a>
+									</figure>
+									<h2 class="shop-item-title"> <%= item.name %></h2>
+									<div class="shop-item-details">
+										<span class="shop-item-price">$<%= item.price / 100 %></span>
+										<button class="btn btn-primary is-pulled-right shop-item-button" type="button">ADD TO CART</button>
+									</div>
+								</div>
+					
+						</article>
+					</div>
+				<% }) %>
+	        </div>
+		</section>
+		
+		<section class="section">
+			<section class="container content-section">
+				<div class="tile is-parent is-vertical">
+					<article class="tile is-child notification ">
+						<p class="title">CART</p>
+						<div class="cart-row">
+							<span class="cart-item cart-header cart-column">ITEM</span>
+							<span class="cart-price cart-header cart-column">PRICE</span>
+							<span class="cart-quantity cart-header cart-column"></span>
+						</div>
+						<div class="cart-items">
+						</div>
+						<div class="cart-total">
+							<strong class="cart-total-title">Total</strong>
+							<span class="cart-total-price">$0.00</span>
+						</div>
+						<button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+					</article>
+				</div>
+			</section>
+		</section>
+	    
+	    <section class="section">
+	        <div class="container is-link">
+	            <div class="level is-parent notification is-link">
+	                <div class="level-left is-child">
+	                    <strong>For enquiries on purchasing a piece or the production of your own websight:</strong>
+
+	                </div>
+	                <div class="level-right is-child">
+	                	
+	                    <h4 class="subtitle"> <a href="https://www.instagram.com/tawataka/?hl=en">
+	                    <i class="fa fa-instagram"></i>Instagram</a> 
+	                    	<br>
+
+	                    	tawa_rv@hotmail.com
+	                    </h4>
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+	</body>
+</html>
