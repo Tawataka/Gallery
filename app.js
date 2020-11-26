@@ -28,6 +28,10 @@ app.get("/store", function(req, res){
         }
     })
 })
+app.get("/about", function(req, res){
+    
+    res.render("about.ejs")
+})
 
 app.post("/purchase", function(req, res){
     fs.readFile("item.json", function(error, data){

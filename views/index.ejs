@@ -12,6 +12,16 @@
 		<script src="store.js" defer></script>
 	</head>
 	<body>
+		<div class="header">
+			<div class="header-left">
+				<a href="store">HOME</a>
+				<a href="about">ABOUT</a>
+			</div>
+			<div class="header-right">
+				<a href="cart.html">CART</a>
+			</div>
+			
+        </div>
 	    <section class="section">
 	    	<div class="container is-fluid">
 	            <div class="hero is-parent is-info is-warning">
@@ -21,11 +31,10 @@
 	                </div>
 	            </div>
        		</div>
-	    </section>
-
+		</section>
+		
 	    <section class="section">
-	        <div class="container is-fluid">
-	        	<p class="title">Inventory</p>	
+	        <div class="container is-fluid">	
 				<% items.merch.forEach(function(item){ %>
 					<div class="tile-merch is-parent is-vertical">
 						<article class="tile is-child notification is-black">
