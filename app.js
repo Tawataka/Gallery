@@ -14,7 +14,7 @@ app.set("view engine", "ejs")
 app.use(express.json())
 app.use(express.static("public"))
 
-app.get("/store", function(req, res){
+app.get("", function(req, res){
     fs.readFile("item.json", function(error, data){
        
         if(error){
@@ -31,6 +31,10 @@ app.get("/store", function(req, res){
 app.get("/about", function(req, res){
     
     res.render("about.ejs")
+})
+app.get("/cart", function(req, res){
+    
+    res.render("cart.ejs")
 })
 
 app.post("/purchase", function(req, res){

@@ -27,7 +27,7 @@
         {
             "id": 5,
             "name": "Reality ( 6x8 )",
-            "price": 1999,
+            "price": 1099,
             "image": "IMG_1.7.jpg"
         },
         {
@@ -41,12 +41,6 @@
             "name": "Under the Moonlight ( 24X36 )",
             "price": 2999,
             "image": "IMG_1.9.jpg"
-        },
-        {
-            "id": 8,
-            "name": "Cliffs ( 6x12 )",
-            "price": 1099,
-            "image": "IMG_1.1.jpg"
         },
         {
             "id": 9,

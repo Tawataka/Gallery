@@ -1,3 +1,5 @@
+getStorage()
+
 if(document.readyState == "loading"){
     document.addEventListener("DOMContentLoaded", ready)
 }
@@ -21,13 +23,16 @@ function ready(){
         var button = addToCartButtons[i]
         button.addEventListener("click", addToCartClick)
     }
+
     document.getElementsByClassName("btn-purchase")[0].addEventListener("click", purchasedClicked)
 
 }
 function removeCartItem(event){
     var buttonClicked = event.target
     buttonClicked.parentElement.parentElement.remove()
+
     updateCartTotal()
+
 }
 
 function addToCartClick(event){
@@ -46,6 +51,7 @@ function addItemToCart(title, price,image, id){
     cartRow.classList.add("cart-row")
     cartRow.dataset.itemId = id
     var cartItems = document.getElementsByClassName("cart-items")[0]
+
     var cartItemNames = cartItems.getElementsByClassName("cart-item-title")
     for(var i = 0; i < cartItemNames.length; i++){
         if(cartItemNames[i].innerText == title){
@@ -66,8 +72,10 @@ function addItemToCart(title, price,image, id){
     `
     cartRow.innerHTML = cartRowContents
     cartItems.append(cartRow)
+
     cartRow.getElementsByClassName("btn-danger")[0].addEventListener("click", removeCartItem)
     cartRow.getElementsByClassName("cart-quantity-input")[0].addEventListener("change", quantityChanger)
+    
 }
 
 function quantityChanger(event){
@@ -91,8 +99,14 @@ function updateCartTotal(){
         var quantity = quantityElement.value
         total = total + (price*quantity)
     }
+
+    var cartAmount = document.getElementsByClassName("cart-amount")[0]
+    cartAmount.innerText = cartRows.length
+
     total = Math.round(total* 100)/100
     document.getElementsByClassName("cart-total-price")[0].innerText = "$" + total
+
+    saveToStorage(cartItemContainer)
 }
 var stripeHandler = StripeCheckout.configure({
     key:stripePublicKey,
@@ -129,6 +143,7 @@ var stripeHandler = StripeCheckout.configure({
             while(cartItems.hasChildNodes()){
                 cartItems.removeChild(cartItems.firstChild)
             }
+            localStorage.clear("cartKey")
             updateCartTotal()
         }).catch(function(error){
             console.log(error)
@@ -143,4 +158,20 @@ function purchasedClicked(){
     stripeHandler.open({
         amount: price
     })
+
+}
+function saveToStorage(cartItems){
+
+    localStorage.setItem("cartKey", JSON.stringify(cartItems.outerHTML))
+    
+}
+function getStorage(){
+    var cartItems = document.getElementsByClassName("cart-items")[0]
+    items = JSON.parse(localStorage.getItem('cartKey'))
+    cartItems.outerHTML = items
+
+    var cartRows = document.getElementsByClassName("cart-row")
+    var cartAmount = document.getElementsByClassName("cart-amount")[0]
+    cartAmount.innerText = cartRows.length - 1
+    updateCartTotal()
 }
