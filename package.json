@@ -1,9 +1,13 @@
 {
+  "homepage": "https://tawataka.github.io/Gallery",
   "name": "gallery",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +23,7 @@
   "dependencies": {
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "nodemailer": "^6.4.16",
     "stripe": "^8.125.0"
   },
   "devDependencies": {
