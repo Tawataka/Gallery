@@ -1,0 +1,3 @@
+This is a web application that combines two of my favorite things, Computer Science and Art. I plain in my free time and began selling my pieces this last year, I created a website that allows users to admire the paintings I have made and if desired, add them to a cart and proceed with a payment method (to achieve this I integrated Stripe). 
+
+I have many projects and professional experience that I can share but I just find this small project to be one of my favorites since it combines my two passions. 

@@ -223,3 +223,20 @@
     background-color: #fff;
     border-radius: 50%;
 }
+.label {
+    font-size: 20px;
+    padding: 0px;
+}
+.saveinfo {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 8px 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.tile{
+    background-color: white;
+}
+  

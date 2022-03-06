@@ -1,9 +1,12 @@
-getStorage()
 
 if(document.readyState == "loading"){
     document.addEventListener("DOMContentLoaded", ready)
+    
 }
 else{
+    if (JSON.parse(localStorage.getItem('cartKey')) != null){
+        getStorage()
+    }
     ready()
 }
 
@@ -23,9 +26,9 @@ function ready(){
         var button = addToCartButtons[i]
         button.addEventListener("click", addToCartClick)
     }
-
-    document.getElementsByClassName("btn-purchase")[0].addEventListener("click", purchasedClicked)
-
+    if (window.location.pathname == '/cart'){
+        document.getElementsByClassName("btn-purchase")[0].addEventListener("click", purchasedClicked)
+    }
 }
 function removeCartItem(event){
     var buttonClicked = event.target
@@ -108,49 +111,66 @@ function updateCartTotal(){
 
     saveToStorage(cartItemContainer)
 }
-var stripeHandler = StripeCheckout.configure({
-    key:stripePublicKey,
-    locale: "en",
-    token: function(token){
-        var items = []
-        var cartItemContainer = document.getElementsByClassName("cart-items")[0]
-        var cartRows = cartItemContainer.getElementsByClassName("cart-row")
-        for(var i = 0; i < cartRows.length; i++){
-            var cartRow  = cartRows[i]
-            var quantityElement = cartRow.getElementsByClassName("cart-quantity-input")[0]
-            var quantity = quantityElement.value
-            var id = cartRow.dataset.itemId
-            items.push({
-                id: id,
-                quantity: quantity
-            })
-        }
-        fetch("/purchase", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                stripeTokenId: token.id,
-                items: items
-            })
-        }).then(function(res){
-            return res.json()
-        }).then(function(data){
-            alert(data.message)
-            var cartItems = document.getElementsByClassName("cart-items")[0]
-            while(cartItems.hasChildNodes()){
-                cartItems.removeChild(cartItems.firstChild)
+if (window.location.pathname == '/cart'){
+    var stripeHandler = StripeCheckout.configure({
+        key:stripePublicKey,
+        locale: "en",
+        token: function(token){
+            var items = []
+            var cartItemContainer = document.getElementsByClassName("cart-items")[0]
+            var cartRows = cartItemContainer.getElementsByClassName("cart-row")
+            for(var i = 0; i < cartRows.length; i++){
+                var cartRow  = cartRows[i]
+                var quantityElement = cartRow.getElementsByClassName("cart-quantity-input")[0]
+                var quantity = quantityElement.value
+                var id = cartRow.dataset.itemId
+                items.push({
+                    id: id,
+                    quantity: quantity
+                })
             }
-            localStorage.clear("cartKey")
-            updateCartTotal()
-        }).catch(function(error){
-            console.log(error)
-        })
+            
+            var name = document.getElementById("fname").value;
+            var email = document.getElementById("email").value;
+            var address = document.getElementById("adr").value;
+            var city = document.getElementById("city").value;
+            var state = document.getElementById("state").value;
+            var zip = document.getElementById("zip").value;
+            fetch("/purchase", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    stripeTokenId: token.id,
+                    items: items,
+                    name: name,
+                    email: email,
+                    address: address,
+                    city:city,
+                    state: state,
+                    zip: zip
+                
+                })
+            }).then(function(res){
+                return res.json()
+            }).then(function(data){
+                alert(data.message)
+                var cartItems = document.getElementsByClassName("cart-items")[0]
+                while(cartItems.hasChildNodes()){
+                    cartItems.removeChild(cartItems.firstChild)
+                }
+                localStorage.clear("cartKey")
+                updateCartTotal()
+                
+            }).catch(function(error){
+                console.log(error)
+            })
 
-    }
-})
+        }
+    })
+}
 function purchasedClicked(){
 
     var priceElement = document.getElementsByClassName("cart-total-price")[0]
@@ -174,4 +194,17 @@ function getStorage(){
     var cartAmount = document.getElementsByClassName("cart-amount")[0]
     cartAmount.innerText = cartRows.length - 1
     updateCartTotal()
+}
+function saveInfo() {
+    var name = document.getElementById("fname").value;
+    var email = document.getElementById("email").value;
+    var address = document.getElementById("adr").value;
+    var city = document.getElementById("city").value;
+    var state = document.getElementById("state").value;
+    var zip = document.getElementById("zip").value;
+
+    if(![name, email, city, address, state, zip].includes("")){
+        // document.getElementById("purchase").disabled = false;
+    }
+
 }

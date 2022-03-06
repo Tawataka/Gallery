@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css"/>
 		<link rel="stylesheet" href="/store.css" />
+		
 		<script src="https://checkout.stripe.com/checkout.js" defer></script>
 		<script>
 			var stripePublicKey = "<%= stripePublicKey %>"
@@ -49,7 +50,11 @@
 									<strong class="cart-total-title">Total</strong>
 									<span class="cart-total-price">$0.00</span>
 								</div>
-								<button class="btn btn-primary btn-purchase" type="button">Procede to Checkout</button>
+								<button class="btn btn-primary" onclick="location.href='cart'" type="button">
+									Procede to Checkout
+								</button>
+								<br>
+								
 							</article>
 						</div>
 					</div>
@@ -96,20 +101,18 @@
 	        <div class="container is-link">
 	            <div class="level is-parent notification is-link">
 	                <div class="level-left is-child">
-	                    <strong>For enquiries on purchasing a piece or the production of your own websight:</strong>
-
+	                    <strong>For enquiries on the production of a websight:</strong>
 	                </div>
 	                <div class="level-right is-child">
-	                	
-	                    <h4 class="subtitle"> <a href="https://www.instagram.com/tawataka/?hl=en">
+	                    <h4 class="subtitle"> <a href="https://www.instagram.com/artbytawa">
 	                    <i class="fa fa-instagram"></i>Instagram</a> 
 	                    	<br>
-
 	                    	tawa_rv@hotmail.com
 	                    </h4>
 	                </div>
 	            </div>
 	        </div>
-	    </section>
+		</section>
+		
 	</body>
 </html>
